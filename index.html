@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ken 的个人网站，展示教育背景、实习经历、项目研究与技术能力。">
+  <title>Ken | 个人网站</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <canvas class="site-matrix" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="返回首页">Ken</a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="#about">关于</a>
+      <a href="#education">教育</a>
+      <a href="#experience">经历</a>
+      <a href="#projects">项目</a>
+      <a href="#interests">兴趣</a>
+      <a href="#contact">联系</a>
+    </nav>
+    <button class="style-toggle" type="button" aria-label="切换页面风格">Style</button>
+  </header>
+
+  <main id="top">
+    <section class="hero section">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">AI · Web3 · Frontend</p>
+        <h1>Ken</h1>
+        <p class="hero-text">
+          Eat well, dress well, and live each day fully. Do not worry too much about the past or the future. Enjoy the present, keep going, and level up.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">查看项目</a>
+          <a class="button secondary" href="https://github.com/ShijieLu222" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+
+      <div class="portrait-wrap reveal">
+        <div class="portrait-frame">
+          <img src="assets/profile.jpg" alt="Ken 的个人照片">
+        </div>
+        <div class="portrait-meta">
+          <span>HKU MSc AI & Decentralized Technologies</span>
+          <span>Bristol Computer Science</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section two-column">
+      <div class="section-heading reveal">
+        <p class="eyebrow">About</p>
+        <h2>关于我</h2>
+      </div>
+      <div class="section-body reveal">
+        <p>
+          我是 Ken，目前将于香港大学攻读人工智能与去中心化技术方向，同时拥有布里斯托大学计算机科学背景。
+          我对大语言模型、Web3 应用、数据分析、计算机视觉与信息系统设计感兴趣，也享受把复杂问题转化为清晰、可交互产品的过程。
+        </p>
+        <div class="stats">
+          <div>
+            <strong>2</strong>
+            <span>所大学经历</span>
+          </div>
+          <div>
+            <strong>3+</strong>
+            <span>项目与研究方向</span>
+          </div>
+          <div>
+            <strong>2</strong>
+            <span>产品/前端实习</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Education</p>
+        <h2>教育经历</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <div class="time">2026.09 - 2027.08</div>
+          <div>
+            <h3>香港大学 <span class="status-badge">在读</span></h3>
+            <p>计算机科学硕士 · AI & Decentralized Technologies</p>
+            <span>核心方向：人工智能、机器学习、区块链、Web3、数据分析、信息系统设计与开发。</span>
+          </div>
+        </article>
+        <article class="timeline-item reveal">
+          <div class="time">2023.09 - 2026.06</div>
+          <div>
+            <h3>布里斯托大学</h3>
+            <p>计算机科学 · Computer Science 本科</p>
+            <span>课程覆盖命令式与函数式编程、计算机架构、面向对象编程、算法、数据库、软件工程、机器学习等。</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Experience</p>
+        <h2>实习经历</h2>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card-top">
+            <span>2025.07 - 2025.09</span>
+            <p>前端开发实习生</p>
+          </div>
+          <h3>中国移动</h3>
+          <p>参与运营管理后台 WEB 端与移动端模块开发，围绕用户故事、验收标准与接口协作推进页面实现。</p>
+          <ul>
+            <li>负责部分页面与交互功能开发，优化响应时间与使用体验。</li>
+            <li>参与需求评审、联调、测试与迭代流程，提升系统可用性。</li>
+          </ul>
+        </article>
+        <article class="card reveal">
+          <div class="card-top">
+            <span>2025.05 - 2025.07</span>
+            <p>产品经理实习生</p>
+          </div>
+          <h3>上海宏朴国际物流有限公司</h3>
+          <p>参与 BI 系统、渠道中心与客户网站优化，连接业务流程、产品方案与研发实现。</p>
+          <ul>
+            <li>梳理业务流程与痛点，输出流程图、PRD 与原型方案。</li>
+            <li>参与验收、用户培训和上线支持，推动系统落地使用。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Projects</p>
+        <h2>项目与研究</h2>
+      </div>
+      <div class="project-grid">
+        <article class="project-card reveal">
+          <span class="project-index">01</span>
+          <h3>少标注场景下的语义分割优化研究</h3>
+          <p>本科毕业设计方向，探索 Cross Pseudo Supervision、FEW-LABEL 与跨任务一致性损失在少标注语义分割中的应用。</p>
+          <div class="tags">
+            <span>Computer Vision</span>
+            <span>PyTorch</span>
+            <span>Research</span>
+          </div>
+        </article>
+        <article class="project-card reveal">
+          <span class="project-index">02</span>
+          <h3>Artspace Lifespace × Bristol Sparks</h3>
+          <p>与公益组织合作开发移动端 App 与 Web 管理平台，负责前端页面、内容管理与需求协作。</p>
+          <div class="tags">
+            <span>React</span>
+            <span>Expo</span>
+            <span>Product</span>
+          </div>
+        </article>
+        <article class="project-card reveal">
+          <span class="project-index">03</span>
+          <h3>运营管理系统前端模块</h3>
+          <p>围绕企业运营场景完成页面开发、权限与流程交互，实现面向真实业务的管理端体验。</p>
+          <div class="tags">
+            <span>Frontend</span>
+            <span>HTML/CSS</span>
+            <span>JavaScript</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section skills-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Skills</p>
+        <h2>专业技能</h2>
+      </div>
+      <div class="skill-cloud reveal" aria-label="技能列表">
+        <span>React</span>
+        <span>React Native</span>
+        <span>TypeScript</span>
+        <span>JavaScript</span>
+        <span>HTML/CSS</span>
+        <span>Redux</span>
+        <span>Axios</span>
+        <span>Figma</span>
+        <span>Git</span>
+        <span>Java</span>
+        <span>Go</span>
+        <span>MySQL</span>
+        <span>AWS</span>
+      </div>
+    </section>
+
+    <section id="interests" class="section interests-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Interests</p>
+        <h2>兴趣爱好</h2>
+      </div>
+      <div class="interest-panel reveal">
+        <div class="interest-grid" aria-label="兴趣爱好列表">
+          <span>篮球</span>
+          <span>足球</span>
+          <span>德州扑克</span>
+          <span>斗地主</span>
+          <span>Blackjack</span>
+          <span>掼蛋</span>
+          <span>游泳</span>
+          <span>台球</span>
+          <span>羽毛球</span>
+          <span>乒乓球</span>
+          <span>炸金花</span>
+          <span>悠悠球</span>
+          <span>麻将</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="reveal">
+        <p class="eyebrow">Contact</p>
+        <h2>保持联系</h2>
+        <p>如果你对我的项目、研究方向或合作机会感兴趣，欢迎通过邮件或 GitHub 联系我。</p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="tel:18017823680"><span>WeChat</span>18017823680</a>
+        <a href="mailto:lushijie2023sh@gmail.com"><span>Email</span>lushijie2023sh@gmail.com</a>
+        <a href="https://github.com/ShijieLu222" target="_blank" rel="noreferrer"><span>GitHub</span>github.com/ShijieLu222</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 Ken</span>
+    <a href="#top">回到顶部</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

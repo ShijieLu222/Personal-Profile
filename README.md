@@ -1,1 +1,13 @@
-# Personal-Profile
+# Ken 的个人网站
+
+这是一个用于展示个人背景、教育经历、实习经历、项目研究与联系方式的极简中文个人网站。
+
+## 本地预览
+
+直接打开 `index.html`，或在仓库目录运行一个本地静态服务器：
+
+```bash
+python3 -m http.server 8000
+```
+
+然后访问 `http://localhost:8000`。
