@@ -1,7 +1,11 @@
 const cursor = document.querySelector(".cursor-dot");
-const hoverTargets = document.querySelectorAll("a, button, .card, .project-card, .portrait-frame, .skill-cloud span, .interest-grid span");
+const hoverTargets = document.querySelectorAll("a, button, .card, .project-card, .portrait-frame, .skill-cloud span, .interest-card");
 const matrixCanvas = document.querySelector(".site-matrix");
 const styleToggle = document.querySelector(".style-toggle");
+const interactiveCards = document.querySelectorAll(".interactive-card");
+const interestViewport = document.querySelector(".interest-viewport");
+const interestTrack = document.querySelector(".interest-track");
+const interestControls = document.querySelectorAll("[data-interest-action]");
 
 if (cursor) {
   window.addEventListener("mousemove", (event) => {
@@ -51,6 +55,103 @@ if (styleToggle) {
     document.body.dataset.style = isSharp ? "glass" : "sharp";
     styleToggle.textContent = isSharp ? "Style" : "Sharp";
   });
+}
+
+interactiveCards.forEach((card) => {
+  card.addEventListener("pointermove", (event) => {
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const rotateY = ((x / rect.width) - 0.5) * 8;
+    const rotateX = ((y / rect.height) - 0.5) * -8;
+
+    card.style.setProperty("--mx", `${x}px`);
+    card.style.setProperty("--my", `${y}px`);
+    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+  });
+
+  card.addEventListener("pointerleave", () => {
+    card.style.transform = "";
+    card.style.setProperty("--mx", "50%");
+    card.style.setProperty("--my", "50%");
+  });
+});
+
+if (interestViewport && interestTrack) {
+  let offset = 0;
+  let speed = 1.55;
+  let isPaused = false;
+  let isDragging = false;
+  let dragX = 0;
+
+  const getLoopWidth = () => interestTrack.scrollWidth / 2;
+
+  const normalizeOffset = () => {
+    const loopWidth = getLoopWidth();
+    if (!loopWidth) return;
+    while (Math.abs(offset) >= loopWidth) offset += loopWidth;
+    while (offset > 0) offset -= loopWidth;
+  };
+
+  const paintInterestTrack = () => {
+    normalizeOffset();
+    interestTrack.style.transform = `translate3d(${offset}px, 0, 0)`;
+  };
+
+  const animateInterests = () => {
+    if (!isPaused && !isDragging) {
+      offset -= speed;
+      paintInterestTrack();
+    }
+
+    requestAnimationFrame(animateInterests);
+  };
+
+  interestControls.forEach((control) => {
+    control.addEventListener("click", () => {
+      const action = control.dataset.interestAction;
+
+      if (action === "faster") speed = Math.min(speed + 0.45, 4.2);
+      if (action === "slower") speed = Math.max(speed - 0.45, 0.45);
+      if (action === "toggle") {
+        isPaused = !isPaused;
+        control.textContent = isPaused ? "Play" : "Pause";
+      }
+    });
+  });
+
+  interestViewport.addEventListener("pointerdown", (event) => {
+    isDragging = true;
+    dragX = event.clientX;
+    interestViewport.classList.add("is-dragging");
+    interestViewport.setPointerCapture(event.pointerId);
+  });
+
+  interestViewport.addEventListener("pointermove", (event) => {
+    if (!isDragging) return;
+    offset += event.clientX - dragX;
+    dragX = event.clientX;
+    paintInterestTrack();
+  });
+
+  const stopDragging = () => {
+    isDragging = false;
+    interestViewport.classList.remove("is-dragging");
+  };
+
+  interestViewport.addEventListener("pointerup", stopDragging);
+  interestViewport.addEventListener("pointercancel", stopDragging);
+  interestViewport.addEventListener(
+    "wheel",
+    (event) => {
+      offset -= event.deltaX || event.deltaY;
+      paintInterestTrack();
+      event.preventDefault();
+    },
+    { passive: false }
+  );
+
+  animateInterests();
 }
 
 if (matrixCanvas) {

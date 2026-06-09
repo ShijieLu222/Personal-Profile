@@ -107,7 +107,7 @@
         <h2>实习经历</h2>
       </div>
       <div class="cards">
-        <article class="card reveal">
+        <article class="card interactive-card reveal">
           <div class="card-top">
             <span>2025.07 - 2025.09</span>
             <p>前端开发实习生</p>
@@ -119,7 +119,7 @@
             <li>参与需求评审、联调、测试与迭代流程，提升系统可用性。</li>
           </ul>
         </article>
-        <article class="card reveal">
+        <article class="card interactive-card reveal">
           <div class="card-top">
             <span>2025.05 - 2025.07</span>
             <p>产品经理实习生</p>
@@ -140,7 +140,7 @@
         <h2>项目与研究</h2>
       </div>
       <div class="project-grid">
-        <article class="project-card reveal">
+        <article class="project-card interactive-card reveal">
           <span class="project-index">01</span>
           <h3>少标注场景下的语义分割优化研究</h3>
           <p>本科毕业设计方向，探索 Cross Pseudo Supervision、FEW-LABEL 与跨任务一致性损失在少标注语义分割中的应用。</p>
@@ -150,7 +150,7 @@
             <span>Research</span>
           </div>
         </article>
-        <article class="project-card reveal">
+        <article class="project-card interactive-card reveal">
           <span class="project-index">02</span>
           <h3>Artspace Lifespace × Bristol Sparks</h3>
           <p>与公益组织合作开发移动端 App 与 Web 管理平台，负责前端页面、内容管理与需求协作。</p>
@@ -160,7 +160,7 @@
             <span>Product</span>
           </div>
         </article>
-        <article class="project-card reveal">
+        <article class="project-card interactive-card reveal">
           <span class="project-index">03</span>
           <h3>运营管理系统前端模块</h3>
           <p>围绕企业运营场景完成页面开发、权限与流程交互，实现面向真实业务的管理端体验。</p>
@@ -180,6 +180,7 @@
       </div>
       <div class="skill-cloud reveal" aria-label="技能列表">
         <span>React</span>
+        <span>Vue 2/3</span>
         <span>React Native</span>
         <span>TypeScript</span>
         <span>JavaScript</span>
@@ -187,6 +188,8 @@
         <span>Redux</span>
         <span>Axios</span>
         <span>Figma</span>
+        <span>draw.io</span>
+        <span>Vibe Coding</span>
         <span>Git</span>
         <span>Java</span>
         <span>Go</span>
@@ -200,21 +203,41 @@
         <p class="eyebrow">Interests</p>
         <h2>兴趣爱好</h2>
       </div>
-      <div class="interest-panel reveal">
-        <div class="interest-grid" aria-label="兴趣爱好列表">
-          <span>篮球</span>
-          <span>足球</span>
-          <span>德州扑克</span>
-          <span>斗地主</span>
-          <span>Blackjack</span>
-          <span>掼蛋</span>
-          <span>游泳</span>
-          <span>台球</span>
-          <span>羽毛球</span>
-          <span>乒乓球</span>
-          <span>炸金花</span>
-          <span>悠悠球</span>
-          <span>麻将</span>
+      <div class="interest-panel reveal" aria-label="兴趣爱好横向滑动卡片">
+        <div class="interest-controls" aria-label="兴趣滑动控制">
+          <button class="interest-control" type="button" data-interest-action="slower" aria-label="减慢兴趣卡片滑动速度">-</button>
+          <button class="interest-control" type="button" data-interest-action="toggle" aria-label="暂停或继续兴趣卡片滑动">Pause</button>
+          <button class="interest-control" type="button" data-interest-action="faster" aria-label="加快兴趣卡片滑动速度">+</button>
+        </div>
+        <div class="interest-viewport">
+          <div class="interest-track">
+            <span class="interest-card tone-court">篮球</span>
+            <span class="interest-card tone-field">足球</span>
+            <span class="interest-card tone-velvet">德州扑克</span>
+            <span class="interest-card tone-sun">斗地主</span>
+            <span class="interest-card tone-ink">Blackjack</span>
+            <span class="interest-card tone-jade">掼蛋</span>
+            <span class="interest-card tone-water">游泳</span>
+            <span class="interest-card tone-smoke">台球</span>
+            <span class="interest-card tone-sky">羽毛球</span>
+            <span class="interest-card tone-lime">乒乓球</span>
+            <span class="interest-card tone-ruby">炸金花</span>
+            <span class="interest-card tone-electric">悠悠球</span>
+            <span class="interest-card tone-rose">麻将</span>
+            <span class="interest-card tone-court" aria-hidden="true">篮球</span>
+            <span class="interest-card tone-field" aria-hidden="true">足球</span>
+            <span class="interest-card tone-velvet" aria-hidden="true">德州扑克</span>
+            <span class="interest-card tone-sun" aria-hidden="true">斗地主</span>
+            <span class="interest-card tone-ink" aria-hidden="true">Blackjack</span>
+            <span class="interest-card tone-jade" aria-hidden="true">掼蛋</span>
+            <span class="interest-card tone-water" aria-hidden="true">游泳</span>
+            <span class="interest-card tone-smoke" aria-hidden="true">台球</span>
+            <span class="interest-card tone-sky" aria-hidden="true">羽毛球</span>
+            <span class="interest-card tone-lime" aria-hidden="true">乒乓球</span>
+            <span class="interest-card tone-ruby" aria-hidden="true">炸金花</span>
+            <span class="interest-card tone-electric" aria-hidden="true">悠悠球</span>
+            <span class="interest-card tone-rose" aria-hidden="true">麻将</span>
+          </div>
         </div>
       </div>
     </section>
