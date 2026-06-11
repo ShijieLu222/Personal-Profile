@@ -1,11 +1,7 @@
 const cursor = document.querySelector(".cursor-dot");
-const hoverTargets = document.querySelectorAll("a, button, .card, .project-card, .portrait-frame, .skill-cloud span, .interest-card");
-const matrixCanvas = document.querySelector(".site-matrix");
-const styleToggle = document.querySelector(".style-toggle");
+const hoverTargets = document.querySelectorAll("a, button, .card, .project-card, .portrait-frame, .skill-cloud span, .interest-token");
+const particleCanvas = document.querySelector(".hero-particles");
 const interactiveCards = document.querySelectorAll(".interactive-card");
-const interestViewport = document.querySelector(".interest-viewport");
-const interestTrack = document.querySelector(".interest-track");
-const interestControls = document.querySelectorAll("[data-interest-action]");
 
 if (cursor) {
   window.addEventListener("mousemove", (event) => {
@@ -22,9 +18,7 @@ if (cursor) {
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      }
+      if (entry.isIntersecting) entry.target.classList.add("is-visible");
     });
   },
   { threshold: 0.16 }
@@ -49,162 +43,152 @@ const navObserver = new IntersectionObserver(
 
 sections.forEach((section) => navObserver.observe(section));
 
-if (styleToggle) {
-  styleToggle.addEventListener("click", () => {
-    const isSharp = document.body.dataset.style === "sharp";
-    document.body.dataset.style = isSharp ? "glass" : "sharp";
-    styleToggle.textContent = isSharp ? "Style" : "Sharp";
-  });
-}
-
 interactiveCards.forEach((card) => {
   card.addEventListener("pointermove", (event) => {
     const rect = card.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    const rotateY = ((x / rect.width) - 0.5) * 8;
-    const rotateX = ((y / rect.height) - 0.5) * -8;
-
     card.style.setProperty("--mx", `${x}px`);
     card.style.setProperty("--my", `${y}px`);
-    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
   });
 
   card.addEventListener("pointerleave", () => {
-    card.style.transform = "";
     card.style.setProperty("--mx", "50%");
     card.style.setProperty("--my", "50%");
   });
 });
 
-if (interestViewport && interestTrack) {
-  let offset = 0;
-  let speed = 1.55;
-  let isPaused = false;
-  let isDragging = false;
-  let dragX = 0;
-
-  const getLoopWidth = () => interestTrack.scrollWidth / 2;
-
-  const normalizeOffset = () => {
-    const loopWidth = getLoopWidth();
-    if (!loopWidth) return;
-    while (Math.abs(offset) >= loopWidth) offset += loopWidth;
-    while (offset > 0) offset -= loopWidth;
-  };
-
-  const paintInterestTrack = () => {
-    normalizeOffset();
-    interestTrack.style.transform = `translate3d(${offset}px, 0, 0)`;
-  };
-
-  const animateInterests = () => {
-    if (!isPaused && !isDragging) {
-      offset -= speed;
-      paintInterestTrack();
-    }
-
-    requestAnimationFrame(animateInterests);
-  };
-
-  interestControls.forEach((control) => {
-    control.addEventListener("click", () => {
-      const action = control.dataset.interestAction;
-
-      if (action === "faster") speed = Math.min(speed + 0.45, 4.2);
-      if (action === "slower") speed = Math.max(speed - 0.45, 0.45);
-      if (action === "toggle") {
-        isPaused = !isPaused;
-        control.textContent = isPaused ? "Play" : "Pause";
-      }
-    });
-  });
-
-  interestViewport.addEventListener("pointerdown", (event) => {
-    isDragging = true;
-    dragX = event.clientX;
-    interestViewport.classList.add("is-dragging");
-    interestViewport.setPointerCapture(event.pointerId);
-  });
-
-  interestViewport.addEventListener("pointermove", (event) => {
-    if (!isDragging) return;
-    offset += event.clientX - dragX;
-    dragX = event.clientX;
-    paintInterestTrack();
-  });
-
-  const stopDragging = () => {
-    isDragging = false;
-    interestViewport.classList.remove("is-dragging");
-  };
-
-  interestViewport.addEventListener("pointerup", stopDragging);
-  interestViewport.addEventListener("pointercancel", stopDragging);
-  interestViewport.addEventListener(
-    "wheel",
-    (event) => {
-      offset -= event.deltaX || event.deltaY;
-      paintInterestTrack();
-      event.preventDefault();
-    },
-    { passive: false }
-  );
-
-  animateInterests();
-}
-
-if (matrixCanvas) {
-  const context = matrixCanvas.getContext("2d");
-  const symbols = "010101 AI WEB3 KEN HKU BRISTOL";
-  let columns = [];
+if (particleCanvas) {
+  const context = particleCanvas.getContext("2d");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pointer = { x: 0, y: 0, active: false };
+  let particles = [];
+  let flickers = [];
   let animationFrame;
 
-  const resizeMatrix = () => {
-    const rect = matrixCanvas.getBoundingClientRect();
+  const resizeParticles = () => {
+    const rect = particleCanvas.getBoundingClientRect();
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    matrixCanvas.width = rect.width * ratio;
-    matrixCanvas.height = rect.height * ratio;
+    particleCanvas.width = rect.width * ratio;
+    particleCanvas.height = rect.height * ratio;
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
 
-    const columnCount = Math.ceil(rect.width / 14);
-    columns = Array.from({ length: columnCount }, (_, index) => ({
-      x: index * 14,
+    const count = Math.min(150, Math.max(78, Math.floor((rect.width * rect.height) / 14500)));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * rect.width,
       y: Math.random() * rect.height,
-      speed: 0.18 + Math.random() * 0.42,
-      tone: Math.random(),
+      vx: (Math.random() - 0.5) * 0.22,
+      vy: (Math.random() - 0.5) * 0.22,
+      size: 0.8 + Math.random() * 1.6,
+      pulse: Math.random() * Math.PI * 2,
+    }));
+
+    flickers = Array.from({ length: 28 }, () => ({
+      x: Math.random() * rect.width,
+      y: Math.random() * rect.height,
+      size: 1 + Math.random() * 2.4,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.018 + Math.random() * 0.04,
+      tone: Math.random() > 0.72 ? "green" : "cyan",
     }));
   };
 
-  const drawMatrix = () => {
-    const width = matrixCanvas.clientWidth;
-    const height = matrixCanvas.clientHeight;
+  const drawParticles = () => {
+    const width = particleCanvas.clientWidth;
+    const height = particleCanvas.clientHeight;
     context.clearRect(0, 0, width, height);
-    context.fillStyle = "rgba(5, 5, 5, 0.68)";
+    context.fillStyle = "#020303";
     context.fillRect(0, 0, width, height);
-    context.font = "13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
 
-    columns.forEach((column, columnIndex) => {
-      for (let row = -40; row < height + 40; row += 22) {
-        const value = symbols[(columnIndex + row + Math.floor(column.y)) % symbols.length];
-        const active = Math.sin((row + column.y) * 0.035 + columnIndex) > 0.68;
-        context.fillStyle = active ? "rgba(244, 244, 239, 0.66)" : "rgba(244, 244, 239, 0.16)";
-        context.fillText(value, column.x, row + column.y);
+    particles.forEach((particle, index) => {
+      if (!prefersReducedMotion) {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        particle.pulse += 0.015;
       }
 
-      if (Math.random() > 0.985) {
-        context.fillStyle = column.tone > 0.5 ? "rgba(244, 244, 239, 0.28)" : "rgba(110, 110, 110, 0.48)";
-        context.fillRect(column.x, column.y % height, 7, 14);
+      if (particle.x < -20) particle.x = width + 20;
+      if (particle.x > width + 20) particle.x = -20;
+      if (particle.y < -20) particle.y = height + 20;
+      if (particle.y > height + 20) particle.y = -20;
+
+      if (pointer.active) {
+        const dx = pointer.x - particle.x;
+        const dy = pointer.y - particle.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance < 170 && distance > 1) {
+          const force = (170 - distance) / 170;
+          particle.x -= (dx / distance) * force * 0.5;
+          particle.y -= (dy / distance) * force * 0.5;
+        }
       }
 
-      column.y = (column.y + column.speed) % 22;
+      for (let j = index + 1; j < particles.length; j += 1) {
+        const other = particles[j];
+        const dx = particle.x - other.x;
+        const dy = particle.y - other.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance < 118) {
+          const alpha = (1 - distance / 118) * 0.16;
+          context.strokeStyle = `rgba(131, 230, 239, ${alpha})`;
+          context.lineWidth = 1;
+          context.beginPath();
+          context.moveTo(particle.x, particle.y);
+          context.lineTo(other.x, other.y);
+          context.stroke();
+        }
+      }
+
+      const glow = 0.45 + Math.sin(particle.pulse) * 0.22;
+      context.fillStyle = `rgba(246, 244, 234, ${glow})`;
+      context.beginPath();
+      context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      context.fill();
     });
 
-    animationFrame = requestAnimationFrame(drawMatrix);
+    flickers.forEach((flicker) => {
+      if (!prefersReducedMotion) flicker.phase += flicker.speed;
+      const intensity = Math.max(0, Math.sin(flicker.phase) * Math.sin(flicker.phase * 0.37));
+      if (intensity < 0.18) return;
+
+      const color = flicker.tone === "green" ? "148, 242, 189" : "131, 230, 239";
+      context.fillStyle = `rgba(${color}, ${intensity * 0.32})`;
+      context.beginPath();
+      context.arc(flicker.x, flicker.y, flicker.size + intensity * 2.2, 0, Math.PI * 2);
+      context.fill();
+
+      context.strokeStyle = `rgba(${color}, ${intensity * 0.18})`;
+      context.beginPath();
+      context.moveTo(flicker.x - 8, flicker.y);
+      context.lineTo(flicker.x + 8, flicker.y);
+      context.moveTo(flicker.x, flicker.y - 8);
+      context.lineTo(flicker.x, flicker.y + 8);
+      context.stroke();
+    });
+
+    const gradient = context.createRadialGradient(width * 0.58, height * 0.45, 0, width * 0.58, height * 0.45, Math.max(width, height) * 0.45);
+    gradient.addColorStop(0, "rgba(148, 242, 189, 0.12)");
+    gradient.addColorStop(0.46, "rgba(131, 230, 239, 0.05)");
+    gradient.addColorStop(1, "rgba(5, 6, 6, 0)");
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, width, height);
+
+    animationFrame = requestAnimationFrame(drawParticles);
   };
 
-  resizeMatrix();
-  drawMatrix();
-  window.addEventListener("resize", resizeMatrix);
+  particleCanvas.addEventListener("pointermove", (event) => {
+    const rect = particleCanvas.getBoundingClientRect();
+    pointer.x = event.clientX - rect.left;
+    pointer.y = event.clientY - rect.top;
+    pointer.active = true;
+  });
+
+  particleCanvas.addEventListener("pointerleave", () => {
+    pointer.active = false;
+  });
+
+  resizeParticles();
+  drawParticles();
+  window.addEventListener("resize", resizeParticles);
   window.addEventListener("beforeunload", () => cancelAnimationFrame(animationFrame));
 }

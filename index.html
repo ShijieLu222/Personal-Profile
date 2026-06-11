@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="cursor-dot" aria-hidden="true"></div>
-  <canvas class="site-matrix" aria-hidden="true"></canvas>
 
   <header class="site-header">
     <a class="brand" href="#top" aria-label="返回首页">Ken</a>
@@ -21,17 +20,22 @@
       <a href="#interests">兴趣</a>
       <a href="#contact">联系</a>
     </nav>
-    <button class="style-toggle" type="button" aria-label="切换页面风格">Style</button>
   </header>
 
   <main id="top">
     <section class="hero section">
+      <canvas class="hero-particles" aria-hidden="true"></canvas>
+      <div class="hero-orbit" aria-hidden="true"></div>
       <div class="hero-copy reveal">
-        <p class="eyebrow">AI · Web3 · Frontend</p>
-        <h1>Ken</h1>
+        <p class="eyebrow">AI · Product · Frontend</p>
+        <h1>Ken<br><span>Shijie Lu</span></h1>
         <p class="hero-text">
-          Eat well, dress well, and live each day fully. Do not worry too much about the past or the future. Enjoy the present, keep going, and level up.
+          计算机科学背景，关注 AI、Web3 与产品体验。现在实习于上海徐汇区 Tezign 特赞，持续把复杂问题转化为清晰、可交互、可落地的数字产品。
         </p>
+        <div class="hero-status" aria-label="当前状态">
+          <span>Current</span>
+          <strong>Intern @ Tezign 特赞 · Shanghai Xuhui</strong>
+        </div>
         <div class="hero-actions">
           <a class="button primary" href="#projects">查看项目</a>
           <a class="button secondary" href="https://github.com/ShijieLu222" target="_blank" rel="noreferrer">GitHub</a>
@@ -43,8 +47,9 @@
           <img src="assets/profile.jpg" alt="Ken 的个人照片">
         </div>
         <div class="portrait-meta">
+          <span>Current · Tezign 特赞实习</span>
           <span>HKU MSc AI & Decentralized Technologies</span>
-          <span>Bristol Computer Science</span>
+          <span>Uni of Bristol Computer Science</span>
         </div>
       </div>
     </section>
@@ -57,7 +62,7 @@
       <div class="section-body reveal">
         <p>
           我是 Ken，目前将于香港大学攻读人工智能与去中心化技术方向，同时拥有布里斯托大学计算机科学背景。
-          我对大语言模型、Web3 应用、数据分析、计算机视觉与信息系统设计感兴趣，也享受把复杂问题转化为清晰、可交互产品的过程。
+          我现在实习于上海徐汇区的 Tezign 特赞公司，对大语言模型、Web3 应用、数据分析、计算机视觉与信息系统设计感兴趣，也享受把复杂问题转化为清晰、可交互产品的过程。
         </p>
         <div class="stats">
           <div>
@@ -107,6 +112,18 @@
         <h2>实习经历</h2>
       </div>
       <div class="cards">
+        <article class="card interactive-card reveal">
+          <div class="card-top">
+            <span>Now</span>
+            <p>实习生</p>
+          </div>
+          <h3>Tezign 特赞 · 上海徐汇区</h3>
+          <p>当前实习所在公司，关注产品体验、数字内容与技术实现之间的连接。</p>
+          <ul>
+            <li>参与真实业务场景中的产品与技术协作。</li>
+            <li>持续沉淀 AI、产品体验与前端工程能力。</li>
+          </ul>
+        </article>
         <article class="card interactive-card reveal">
           <div class="card-top">
             <span>2025.07 - 2025.09</span>
@@ -203,40 +220,64 @@
         <p class="eyebrow">Interests</p>
         <h2>兴趣爱好</h2>
       </div>
-      <div class="interest-panel reveal" aria-label="兴趣爱好横向滑动卡片">
-        <div class="interest-controls" aria-label="兴趣滑动控制">
-          <button class="interest-control" type="button" data-interest-action="slower" aria-label="减慢兴趣卡片滑动速度">-</button>
-          <button class="interest-control" type="button" data-interest-action="toggle" aria-label="暂停或继续兴趣卡片滑动">Pause</button>
-          <button class="interest-control" type="button" data-interest-action="faster" aria-label="加快兴趣卡片滑动速度">+</button>
+      <div class="interest-panel reveal" aria-label="兴趣爱好动态展示">
+        <div class="interest-signal" aria-hidden="true">
+          <span class="signal-ring"></span>
+          <span class="signal-ring is-inner"></span>
+          <span class="signal-dot dot-a"></span>
+          <span class="signal-dot dot-b"></span>
+          <span class="signal-dot dot-c"></span>
         </div>
-        <div class="interest-viewport">
-          <div class="interest-track">
-            <span class="interest-card tone-court">篮球</span>
-            <span class="interest-card tone-field">足球</span>
-            <span class="interest-card tone-velvet">德州扑克</span>
-            <span class="interest-card tone-sun">斗地主</span>
-            <span class="interest-card tone-ink">Blackjack</span>
-            <span class="interest-card tone-jade">掼蛋</span>
-            <span class="interest-card tone-water">游泳</span>
-            <span class="interest-card tone-smoke">台球</span>
-            <span class="interest-card tone-sky">羽毛球</span>
-            <span class="interest-card tone-lime">乒乓球</span>
-            <span class="interest-card tone-ruby">炸金花</span>
-            <span class="interest-card tone-electric">悠悠球</span>
-            <span class="interest-card tone-rose">麻将</span>
-            <span class="interest-card tone-court" aria-hidden="true">篮球</span>
-            <span class="interest-card tone-field" aria-hidden="true">足球</span>
-            <span class="interest-card tone-velvet" aria-hidden="true">德州扑克</span>
-            <span class="interest-card tone-sun" aria-hidden="true">斗地主</span>
-            <span class="interest-card tone-ink" aria-hidden="true">Blackjack</span>
-            <span class="interest-card tone-jade" aria-hidden="true">掼蛋</span>
-            <span class="interest-card tone-water" aria-hidden="true">游泳</span>
-            <span class="interest-card tone-smoke" aria-hidden="true">台球</span>
-            <span class="interest-card tone-sky" aria-hidden="true">羽毛球</span>
-            <span class="interest-card tone-lime" aria-hidden="true">乒乓球</span>
-            <span class="interest-card tone-ruby" aria-hidden="true">炸金花</span>
-            <span class="interest-card tone-electric" aria-hidden="true">悠悠球</span>
-            <span class="interest-card tone-rose" aria-hidden="true">麻将</span>
+        <div class="interest-stream">
+          <div class="interest-row">
+            <span class="interest-token">篮球</span>
+            <span class="interest-token">足球</span>
+            <span class="interest-token">游泳</span>
+            <span class="interest-token">台球</span>
+            <span class="interest-token">羽毛球</span>
+            <span class="interest-token">乒乓球</span>
+            <span class="interest-token" aria-hidden="true">篮球</span>
+            <span class="interest-token" aria-hidden="true">足球</span>
+            <span class="interest-token" aria-hidden="true">游泳</span>
+            <span class="interest-token" aria-hidden="true">台球</span>
+          </div>
+          <div class="interest-row is-reverse">
+            <span class="interest-token">德州扑克</span>
+            <span class="interest-token">斗地主</span>
+            <span class="interest-token">Blackjack</span>
+            <span class="interest-token">掼蛋</span>
+            <span class="interest-token">麻将</span>
+            <span class="interest-token">炸金花</span>
+            <span class="interest-token" aria-hidden="true">德州扑克</span>
+            <span class="interest-token" aria-hidden="true">斗地主</span>
+            <span class="interest-token" aria-hidden="true">Blackjack</span>
+            <span class="interest-token" aria-hidden="true">掼蛋</span>
+          </div>
+          <div class="interest-row is-slow">
+            <span class="interest-token">动漫</span>
+            <span class="interest-token">Vibe Coding</span>
+            <span class="interest-token">散步</span>
+            <span class="interest-token">健身</span>
+            <span class="interest-token">唱K</span>
+            <span class="interest-token">悠悠球</span>
+            <span class="interest-token">日常探索</span>
+            <span class="interest-token" aria-hidden="true">动漫</span>
+            <span class="interest-token" aria-hidden="true">Vibe Coding</span>
+            <span class="interest-token" aria-hidden="true">散步</span>
+            <span class="interest-token" aria-hidden="true">健身</span>
+            <span class="interest-token" aria-hidden="true">唱K</span>
+          </div>
+          <div class="interest-row is-reverse is-muted">
+            <span class="interest-token">运动节奏</span>
+            <span class="interest-token">策略博弈</span>
+            <span class="interest-token">创意编程</span>
+            <span class="interest-token">生活观察</span>
+            <span class="interest-token">放空散步</span>
+            <span class="interest-token">力量训练</span>
+            <span class="interest-token" aria-hidden="true">运动节奏</span>
+            <span class="interest-token" aria-hidden="true">策略博弈</span>
+            <span class="interest-token" aria-hidden="true">创意编程</span>
+            <span class="interest-token" aria-hidden="true">生活观察</span>
           </div>
         </div>
       </div>
