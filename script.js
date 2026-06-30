@@ -1,7 +1,8 @@
 const cursor = document.querySelector(".cursor-dot");
-const hoverTargets = document.querySelectorAll("a, button, .card, .project-card, .portrait-frame, .skill-cloud span, .interest-token");
+const hoverTargets = document.querySelectorAll("a, button, .card, .project-card, .education-panel, .skill-cloud span, .interest-token");
 const particleCanvas = document.querySelector(".hero-particles");
 const interactiveCards = document.querySelectorAll(".interactive-card");
+const parallaxPanels = document.querySelectorAll("[data-parallax-panel]");
 
 if (cursor) {
   window.addEventListener("mousemove", (event) => {
@@ -55,6 +56,21 @@ interactiveCards.forEach((card) => {
   card.addEventListener("pointerleave", () => {
     card.style.setProperty("--mx", "50%");
     card.style.setProperty("--my", "50%");
+  });
+});
+
+parallaxPanels.forEach((panel) => {
+  panel.addEventListener("pointermove", (event) => {
+    const rect = panel.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 18;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 12;
+    panel.style.setProperty("--panel-x", `${x}px`);
+    panel.style.setProperty("--panel-y", `${y}px`);
+  });
+
+  panel.addEventListener("pointerleave", () => {
+    panel.style.setProperty("--panel-x", "0px");
+    panel.style.setProperty("--panel-y", "0px");
   });
 });
 
