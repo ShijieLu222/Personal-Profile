@@ -569,6 +569,87 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
+.experience-timeline {
+  position: relative;
+  display: grid;
+  margin-top: 52px;
+  padding-left: clamp(18px, 4vw, 48px);
+}
+
+.experience-timeline::before {
+  position: absolute;
+  left: clamp(4px, 1.6vw, 18px);
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(245, 243, 238, 0.42), transparent);
+  content: "";
+}
+
+.experience-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) minmax(0, 1fr);
+  gap: clamp(28px, 6vw, 74px);
+  padding: 34px 0;
+  border-top: 1px solid var(--line);
+}
+
+.experience-item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.experience-item::before {
+  position: absolute;
+  left: calc(clamp(4px, 1.6vw, 18px) * -1 - 5px);
+  top: 43px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid rgba(245, 243, 238, 0.7);
+  background: var(--bg);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.experience-date {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  color: var(--soft);
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.experience-date i {
+  color: var(--amber);
+  font-style: normal;
+}
+
+.experience-copy {
+  max-width: 760px;
+}
+
+.experience-role {
+  margin-bottom: 12px;
+  color: var(--soft);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.experience-role span {
+  display: inline-flex;
+  margin-left: 8px;
+  padding: 2px 7px;
+  border: 1px solid rgba(201, 173, 115, 0.45);
+  color: var(--amber);
+}
+
+.experience-summary {
+  color: rgba(245, 243, 238, 0.72);
+}
+
 .timeline-item,
 .card,
 .project-card {
@@ -593,6 +674,43 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
   border-top: 0;
+}
+
+.project-index-list {
+  display: grid;
+  margin-top: 52px;
+  border-top: 1px solid var(--line);
+}
+
+.project-entry {
+  display: grid;
+  grid-template-columns: minmax(110px, 160px) minmax(0, 1fr) minmax(220px, 0.42fr);
+  gap: clamp(24px, 4vw, 54px);
+  align-items: start;
+  padding: clamp(30px, 6vw, 58px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-entry .project-index {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(3.4rem, 8vw, 7rem);
+  line-height: 0.86;
+}
+
+.project-entry h3 {
+  margin-bottom: 16px;
+  font-size: clamp(2.1rem, 4.5vw, 4.6rem);
+}
+
+.project-entry p {
+  max-width: 680px;
+  color: rgba(245, 243, 238, 0.68);
+}
+
+.project-entry .tags {
+  justify-content: flex-start;
+  padding-top: 8px;
 }
 
 .project-card {
@@ -700,19 +818,22 @@ ul {
   transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
-.skill-cloud span:nth-child(1),
-.skill-cloud span:nth-child(4),
-.skill-cloud span:nth-child(5) {
+.skill-cloud span.skill-xl {
   color: var(--ink);
   font-size: clamp(2.2rem, 5vw, 4.8rem);
   font-family: var(--serif);
 }
 
-.skill-cloud span:nth-child(2),
-.skill-cloud span:nth-child(3),
-.skill-cloud span:nth-child(6),
-.skill-cloud span:nth-child(13) {
+.skill-cloud span.skill-lg {
   font-size: clamp(1.2rem, 2.4vw, 2rem);
+}
+
+.skill-cloud span.skill-md {
+  font-size: clamp(0.98rem, 1.8vw, 1.34rem);
+}
+
+.skill-cloud span.skill-sm {
+  font-size: 0.82rem;
 }
 
 .skill-cloud span:hover {
@@ -1024,6 +1145,16 @@ ul {
   .timeline-item,
   .project-grid {
     grid-template-columns: 1fr;
+  }
+
+  .experience-item,
+  .project-entry {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .project-entry .tags {
+    padding-top: 0;
   }
 
   .education-stage {

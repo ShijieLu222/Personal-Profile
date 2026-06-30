@@ -1,5 +1,5 @@
 const cursor = document.querySelector(".cursor-dot");
-const hoverTargets = document.querySelectorAll("a, button, .card, .project-card, .education-panel, .skill-cloud span, .interest-token");
+const hoverTargets = document.querySelectorAll("a, button, .experience-item, .project-entry, .education-panel, .skill-cloud span, .interest-token");
 const particleCanvas = document.querySelector(".hero-particles");
 const interactiveCards = document.querySelectorAll(".interactive-card");
 const parallaxPanels = document.querySelectorAll("[data-parallax-panel]");
